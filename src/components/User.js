@@ -8,6 +8,8 @@ class User extends Component {
   }
 }
 
+//functional component version
+
 // const User = (props) => {
 //   return <li className={classes.user}>{props.name}</li>;
 // };
