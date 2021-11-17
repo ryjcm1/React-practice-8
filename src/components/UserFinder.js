@@ -3,6 +3,7 @@ import { Fragment, useState, useEffect, Component } from "react";
 import Users from "./Users";
 import classes from "./UserFinder.module.css";
 import UsersContext from "../store/user-context";
+import ErrorBoundry from "./ErrorBoundry";
 
 // const DUMMY_USERS = [
 //   { id: "u1", name: "Max" },
@@ -11,7 +12,7 @@ import UsersContext from "../store/user-context";
 // ];
 
 class UserFinder extends Component {
-    static contextType = UsersContext;
+  static contextType = UsersContext;
 
   constructor() {
     super();
@@ -21,8 +22,8 @@ class UserFinder extends Component {
     };
   }
 
-  componentDidMount(){
-      this.setState({filteredUsers: this.context.users})
+  componentDidMount() {
+    this.setState({ filteredUsers: this.context.users });
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -45,7 +46,9 @@ class UserFinder extends Component {
         <div className={classes.finder}>
           <input type="search" onChange={this.searchChangeHandler.bind(this)} />
         </div>
-        <Users users={this.state.filteredUsers} />
+        <ErrorBoundry>
+          <Users users={this.state.filteredUsers} />
+        </ErrorBoundry>
       </Fragment>
     );
   }
